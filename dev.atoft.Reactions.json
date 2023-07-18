@@ -19,7 +19,6 @@
     "cleanup" : [
         "/bin/gtk4-*",
         "/include",
-        "/lib/debug",
         "/lib/pkgconfig",
         "/man",
         "/share/applications/org.gtk*",
