@@ -1,0 +1,35 @@
+From a32d258723a878542237f6d5816240b90661e3cc Mon Sep 17 00:00:00 2001
+From: bbhtt <bbhtt.zn0i8@slmail.me>
+Date: Tue, 18 Jul 2023 11:27:38 +0530
+Subject: [PATCH] Fix deprecations
+
+---
+ build.zig | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/build.zig b/build.zig
+index 2d9b2ba..152b8fa 100644
+--- a/build.zig
++++ b/build.zig
+@@ -15,12 +15,12 @@ pub fn build(b: *Builder) void {
+     exe.setTarget(target);
+     exe.setBuildMode(mode);
+
+-    exe.addIncludeDir("/usr/include");
+-    exe.addIncludeDir("/usr/include/x86_64-linux-gnu");
+-    exe.addIncludeDir("/usr/include/aarch64-linux-gnu");
+-    exe.addLibPath("/usr/lib");
+-    exe.addLibPath("/usr/lib/x86_64-linux-gnu");
+-    exe.addLibPath("/usr/lib/aarch64-linux-gnu");
++    exe.addIncludePath("/usr/include");
++    exe.addIncludePath("/usr/include/x86_64-linux-gnu");
++    exe.addIncludePath("/usr/include/aarch64-linux-gnu");
++    exe.addLibraryPath("/usr/lib");
++    exe.addLibraryPath("/usr/lib/x86_64-linux-gnu");
++    exe.addLibraryPath("/usr/lib/aarch64-linux-gnu");
+
+     exe.linkLibC();
+     exe.linkSystemLibrary("c");
+--
+2.41.0
+

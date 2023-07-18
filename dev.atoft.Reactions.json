@@ -1,7 +1,7 @@
 {
     "app-id" : "dev.atoft.Reactions",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "41",
+    "runtime-version" : "44",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions": ["org.freedesktop.Sdk.Extension.ziglang"],
     "command" : "reactions",
@@ -19,7 +19,6 @@
     "cleanup" : [
         "/bin/gtk4-*",
         "/include",
-        "/lib/debug",
         "/lib/pkgconfig",
         "/man",
         "/share/applications/org.gtk*",
@@ -34,61 +33,22 @@
         "/zig"
     ],
     "modules" : [
-        {
-            "name" : "libsass",
-            "buildsystem" : "meson",
-            "sources" : [
-                {
-                    "type" : "git",
-                    "url" : "https://github.com/lazka/libsass.git",
-                    "branch" : "meson",
-                    "commit" : "302397c0c8ae2d7ab02f45ea461c2c3d768f248e"
-                }
-            ]
-        },
-        {
-            "name" : "sassc",
-            "buildsystem" : "meson",
-            "sources" : [
-                {
-                    "type" : "git",
-                    "url" : "https://github.com/lazka/sassc.git",
-                    "branch" : "meson",
-                    "commit" : "82803377c33247265d779af034eceb5949e78354"
-                }
-            ]
-        },
+        "shared-modules/libsoup/libsoup-2.4.json",
         {
             "name" : "gtk",
             "buildsystem" : "meson",
             "config-opts" : [
-                "-Dmedia-ffmpeg=enabled"
+                "-Dmedia-ffmpeg=enabled",
+                "-Ddemos=false",
+                "-Dbuild-testsuite=false",
+                "-Dbuild-examples=false",
+                "-Dbuild-tests=false"
             ],
             "sources" : [
                 {
-                    "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/gtk.git",
-                    "tag" : "4.4.0",
-                    "commit" : "f1f197e3b94a55d5cbfaae2498f991a0ae733b32"
-                }
-            ]
-        },
-        {
-            "name": "libadwaita",
-            "buildsystem": "meson",
-            "config-opts": [
-                "-Dgtk_doc=false",
-                "-Dtests=false",
-                "-Dexamples=false",
-                "-Dvapi=false",
-                "-Dglade_catalog=disabled"
-            ],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/libadwaita.git",
-                    "tag" : "1.0.0.alpha.4",
-                    "commit" : "6b447fde8f270001a0dc29ef59d3e9bf6d32dae9"
+                    "type" : "archive",
+                    "url" : "https://download.gnome.org/sources/gtk/4.10/gtk-4.10.4.tar.xz",
+                    "sha256" : "7725400482e0685e28265e226c62847f4e73cfca9e9b416ac5838207f5377a24"
                 }
             ]
         },
@@ -102,6 +62,10 @@
                     "url" : "https://codeberg.org/atoft/Reactions.git",
                     "tag" : "0.1.0",
                     "commit" : "cd58781157a8e6e3ab7482b6b170a9441d2a06f4"
+                },
+                {
+                    "type" : "patch",
+                    "path" : "zig-deprecations.patch"
                 }
             ]
         }
